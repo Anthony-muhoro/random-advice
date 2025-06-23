@@ -35,7 +35,7 @@ const Home = () => {
             className="bg-red-100 border-red-400 text-red-800"
           >
             <AlertCircle className="h-5 w-5" />
-            <AlertTitle>Error</AlertTitle>
+            
             <AlertDescription>
               Something went wrong. Please try again.
             </AlertDescription>
