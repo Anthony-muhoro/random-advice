@@ -1,7 +1,10 @@
 import React, { useState } from "react";
+import { Button } from "~/components/ui/button";
+import { Alert, AlertTitle, AlertDescription } from "~/components/ui/alert";
+import { Loader2, AlertCircle } from "lucide-react";
 
 const Home = () => {
-  const [advice, setAdvice] = useState("Do nothing be nothing");
+  const [advice, setAdvice] = useState("Do nothing, be nothing.");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
@@ -20,18 +23,46 @@ const Home = () => {
   };
 
   return (
-    <div className="flex flex-col w-full items-center  min-h-screen bg-orange-900 text-white gap-4">
-      <h1 className="mt-12">Get a Random Advice</h1>
-      <h1 className="text-2xl font-bold text-center">
-        {error ? "something went wrong. Please Try again" : advice}
-      </h1>
-      <button
-        onClick={getRandomAdvice}
-        disabled={loading}
-        className="px-4 py-2 bg-blue-600 rounded hover:bg-gray-800 cursor-pointer"
-      >
-        {loading ? "Loading..." : "Get Advice"}
-      </button>
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-6">
+      <div className="bg-white shadow-md rounded-xl p-8 max-w-xl w-full space-y-6 border border-gray-200">
+        <h1 className=" flex justify-center items-center text-3xl font-bold text-center text-gray-800 gap-3">
+          <img src="/logo.svg" alt="ThinIt" /> Get Random Advice
+        </h1>
+
+        {error ? (
+          <Alert
+            variant="destructive"
+            className="bg-red-100 border-red-400 text-red-800"
+          >
+            <AlertCircle className="h-5 w-5" />
+            <AlertTitle>Error</AlertTitle>
+            <AlertDescription>
+              Something went wrong. Please try again.
+            </AlertDescription>
+          </Alert>
+        ) : (
+          <div className="bg-gray-50 p-6 rounded-lg border border-gray-200 text-center text-lg font-medium text-gray-700 min-h-[120px] flex items-center justify-center">
+            {advice}
+          </div>
+        )}
+
+        <div className="flex justify-center">
+          <Button
+            onClick={getRandomAdvice}
+            disabled={loading}
+            className="px-8 py-4 text-lg cursor-pointer"
+          >
+            {loading ? (
+              <>
+                <Loader2 className="mr-2 h-5 w-5 animate-spin text-white" />
+                Loading...
+              </>
+            ) : (
+              "Get Advice"
+            )}
+          </Button>
+        </div>
+      </div>
     </div>
   );
 };
