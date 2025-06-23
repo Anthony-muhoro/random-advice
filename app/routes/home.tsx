@@ -4,9 +4,12 @@ import { Alert, AlertTitle, AlertDescription } from "~/components/ui/alert";
 import { Loader2, AlertCircle } from "lucide-react";
 
 const Home = () => {
-  const [advice, setAdvice] = useState("Do nothing, be nothing.");
+  const [advice, setAdvice] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+    useEffect(() => {
+    getRandomAdvice();
+  }, []);
 
   const getRandomAdvice = async () => {
     setLoading(true);
